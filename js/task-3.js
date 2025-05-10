@@ -1,31 +1,34 @@
-console.log(" ");
-console.log("Task 3!");
-console.log(" ");
-
-function filterArray(numbers, value) {
-    const filteredArray = [];
-
-    // 1 variant
-
-    for (const elem of numbers) {
-        if (elem > value) {
-            filteredArray.push(elem);
-        }
+class StringBuilder {
+    #value;
+    constructor(initialValue) {
+        this.#value = initialValue;
     }
 
-    // 2 variant
+    getValue() {
+        return this.#value;
+    }
 
-    // for (let i = 0; i < numbers.length; i++) {
-    //     if (numbers[i] > value) {
-    //         filteredArray.push(numbers[i]);
-    //     }
-    // }
+    padEnd(str) {
+        this.#value += str
+    }
 
-    return filteredArray;
+    padStart(str) {
+        this.#value = str + this.#value
+    }
+
+    padBoth(str) {
+        this.padStart(str)
+        this.padEnd(str)
+        return this.#value;
+    }
 }
 
-console.log(filterArray([1, 2, 3, 4, 5], 3)); // [4, 5]
-console.log(filterArray([1, 2, 3, 4, 5], 4)); // [5]
-console.log(filterArray([1, 2, 3, 4, 5], 5)); // []
-console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
-console.log(filterArray([12, 24, 8, 41, 76], 20)); // [24, 41, 76]
+const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="
+
